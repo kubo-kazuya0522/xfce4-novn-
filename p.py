@@ -250,3 +250,6 @@ keycode 253 =
 keycode 254 =
 keycode 255 =
 @kubo-kazuya0522 ➜ /workspaces/xfce4-novn- (main) $ 
+xmodmap -e "keycode  = ISO_Level3_Shift"
+xmodmap:  commandline:1:  bad keycode value
+xmodmap:  1 error encountered, aborting.
