@@ -253,9 +253,12 @@ keycode 255 =
 xmodmap -e "keycode  = ISO_Level3_Shift"
 xmodmap:  commandline:1:  bad keycode value
 xmodmap:  1 error encountered, aborting.
-  kazuya0522 ➜ /workspaces/xfce4-novn- (main) $ xmodmap -pke | grep Alt_R
+kazuya0522 ➜ /workspaces/xfce4-novn- (main) $ xmodmap -pke | grep Alt_R
 keycode  15 = Alt_R
 @kubo-kazuya0522 ➜ /workspaces/xfce4-novn- (main) $ xmodmap -e "keycode  = ISO_Level3_Shift"
 xmodmap:  commandline:1:  bad keycode value
 xmodmap:  1 error encountered, aborting.
 @kubo-kazuya0522 ➜ /workspaces/xfce4-novn- (main) $ 
+  kazuya0522 ➜ ~/デスクトップ $ xmodmap -pke | grep -i backspace
+keycode  22 = BackSpace Delete
+keycode  64 = BackSpace
