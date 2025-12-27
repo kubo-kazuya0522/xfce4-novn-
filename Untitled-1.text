@@ -1,33 +1,140 @@
+@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 --version 
+Python 3.11.9
 @kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
-sudo apt install -y \
-    python3-gi \
-    python3-gi-cairo \
-    gir1.2-gst-1.0 \
-0% [処理中]t-plugins-base-1.0 \
-    gstreamer1.0-plugins-good \
-    gstreamer1.0-plugins-bad \
-ヒット:1 https://dl.yarnpkg.com/debian stable InRelease
-0% [ヘッダの待機中です] [ヘッダの待機中です] [ヘッダの待er1.0-plugins-base \
-    gstreamer1.0-pulseaudio \
-ヒット:2 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
-0% [ヘッダの待機中です] [ヘッダの待機中です] [archive.ubuntu.gstreamer1.0-tools
-ヒット:3 https://packages.mozilla.org/apt mozilla InRelease                    
-ヒット:4 http://archive.ubuntu.com/ubuntu noble InRelease                      
-ヒット:5 http://archive.ubuntu.com/ubuntu noble-updates InRelease              
-ヒット:6 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
-ヒット:7 https://packages.microsoft.com/repos/code stable InRelease            
-ヒット:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease            
-ヒット:9 http://security.ubuntu.com/ubuntu noble-security InRelease
+do apt install -sudo apt install -y \
+  libgirepository1.0-dev \
+  libcairo2-dev \
+  pkg-config \
+  gir1.2-gst-1.0 \
+0% [処理中]0 \lugins-base-1.
+  gstreamer1.0-plugins-good \
+  gstreamer1.0-plugins-bad \
+ヒット:1 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
+\
+ヒット:2 https://packages.microsoft.com/repos/code stable InRelease            
+0% [packages.mozilla.org へ接続しています] [archive.ubuntu.com へ接�  gstreamer1.0-pulseaudio \
+  gstreamer1.0-tools
+ヒット:3 https://dl.yarnpkg.com/debian stable InRelease                        
+ヒット:4 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
+ヒット:5 https://packages.mozilla.org/apt mozilla InRelease                    
+ヒット:6 http://archive.ubuntu.com/ubuntu noble InRelease                      
+ヒット:7 http://security.ubuntu.com/ubuntu noble-security InRelease            
+ヒット:8 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+ヒット:9 http://archive.ubuntu.com/ubuntu noble-backports InRelease
 パッケージリストを読み込んでいます... 完了
 依存関係ツリーを作成しています... 完了
 状態情報を読み取っています... 完了        
 アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
-@kubo-kazuya0522 ➜ ~/デスクトップ $ python3
-Python 3.12.1 (main, Nov 27 2025, 10:47:52) [GCC 13.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import gi
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-ModuleNotFoundError: No module named 'gi'
->>> 
+@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 -m pip install --upgrade pip setuptools wheel
+python3 -m pip install PyGObject
+Requirement already satisfied: pip in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (24.0)
+Collecting pip
+  Using cached pip-25.3-py3-none-any.whl.metadata (4.7 kB)
+Requirement already satisfied: setuptools in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (65.5.0)
+Collecting setuptools
+  Using cached setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting wheel
+  Downloading wheel-0.45.1-py3-none-any.whl.metadata (2.3 kB)
+Using cached pip-25.3-py3-none-any.whl (1.8 MB)
+Using cached setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.5/72.5 kB 4.6 MB/s eta 0:00:00
+Installing collected packages: wheel, setuptools, pip
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 65.5.0
+    Uninstalling setuptools-65.5.0:
+      Successfully uninstalled setuptools-65.5.0
+  Attempting uninstall: pip
+    Found existing installation: pip 24.0
+    Uninstalling pip-24.0:
+      Successfully uninstalled pip-24.0
+Successfully installed pip-25.3 setuptools-80.9.0 wheel-0.45.1
+@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 -m pip install PyGObject
+Collecting PyGObject
+  Using cached pygobject-3.54.5.tar.gz (1.3 MB)
+  Installing build dependencies ... error
+  error: subprocess-exited-with-error
+  
+  × installing build dependencies for PyGObject did not run successfully.
+  │ exit code: 1
+  ╰─> [74 lines of output]
+      Collecting meson-python>=0.12.1
+        Using cached meson_python-0.18.0-py3-none-any.whl.metadata (2.8 kB)
+      Collecting pycairo>=1.16
+        Using cached pycairo-1.29.0.tar.gz (665 kB)
+        Installing build dependencies: started
+        Installing build dependencies: finished with status 'done'
+        Getting requirements to build wheel: started
+        Getting requirements to build wheel: finished with status 'done'
+        Installing backend dependencies: started
+        Installing backend dependencies: finished with status 'done'
+        Preparing metadata (pyproject.toml): started
+        Preparing metadata (pyproject.toml): finished with status 'error'
+        error: subprocess-exited-with-error
+      
+        × Preparing metadata (pyproject.toml) did not run successfully.
+        │ exit code: 1
+        ╰─> [47 lines of output]
+            + meson setup /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md -Dwheel=true -Dtests=false --native-file=/tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw/meson-python-native-file.ini
+            The Meson build system
+            Version: 1.10.0
+            Source dir: /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb
+            Build dir: /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw
+            Build type: native build
+            Project name: pycairo
+            Project version: 1.29.0
+            C compiler for the host machine: cc (gcc 13.3.0 "cc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0")
+            C linker for the host machine: cc ld.bfd 2.42
+            Host machine cpu family: x86_64
+            Host machine cpu: x86_64
+            Program python3 found: YES (/home/codespace/.pyenv/versions/3.11.9/bin/python3)
+            Compiler for C supports arguments -Wall: YES
+            Compiler for C supports arguments -Warray-bounds: YES
+            Compiler for C supports arguments -Wcast-align: YES
+            Compiler for C supports arguments -Wconversion: YES
+            Compiler for C supports arguments -Wextra: YES
+            Compiler for C supports arguments -Wformat=2: YES
+            Compiler for C supports arguments -Wformat-nonliteral: YES
+            Compiler for C supports arguments -Wformat-security: YES
+            Compiler for C supports arguments -Wimplicit-function-declaration: YES
+            Compiler for C supports arguments -Winit-self: YES
+            Compiler for C supports arguments -Wmissing-format-attribute: YES
+            Compiler for C supports arguments -Wmissing-noreturn: YES
+            Compiler for C supports arguments -Wnested-externs: YES
+            Compiler for C supports arguments -Wold-style-definition: YES
+            Compiler for C supports arguments -Wpacked: YES
+            Compiler for C supports arguments -Wpointer-arith: YES
+            Compiler for C supports arguments -Wreturn-type: YES
+            Compiler for C supports arguments -Wshadow: YES
+            Compiler for C supports arguments -Wsign-compare: YES
+            Compiler for C supports arguments -Wstrict-aliasing: YES
+            Compiler for C supports arguments -Wundef: YES
+            Compiler for C supports arguments -Wunused-but-set-variable: YES
+            Compiler for C supports arguments -Wswitch-default: YES
+            Compiler for C supports arguments -Wno-missing-field-initializers: YES
+            Compiler for C supports arguments -Wno-unused-parameter: YES
+            Compiler for C supports arguments -fno-strict-aliasing: YES
+            Compiler for C supports arguments -fvisibility=hidden: YES
+            Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+            Found CMake: /usr/bin/cmake (3.28.3)
+            Run-time dependency cairo found: NO (tried pkgconfig and cmake)
+      
+            ../cairo/meson.build:31:12: ERROR: Dependency "cairo" not found, tried pkgconfig and cmake
+      
+            A full log can be found at /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw/meson-logs/meson-log.txt
+            [end of output]
+      
+        note: This error originates from a subprocess, and is likely not a problem with pip.
+      error: metadata-generation-failed
+      
+      × Encountered error while generating package metadata.
+      ╰─> pycairo
+      
+      note: This is an issue with the package mentioned above, not pip.
+      hint: See above for details.
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+ERROR: Failed to build 'PyGObject' when installing build dependencies for pygobject
+@kubo-kazuya0522 ➜ ~/デスクトップ $ 
 
