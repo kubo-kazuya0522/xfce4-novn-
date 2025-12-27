@@ -1,20 +1,11 @@
-@kubo-kazuya0522 ➜ ~/デスクトップ $ pyenv global system
-hash -r
-@kubo-kazuya0522 ➜ ~/デスクトップ $ hash -r
-@kubo-kazuya0522 ➜ ~/デスクトップ $ which python3
-/home/codespace/.pyenv/shims/python3
-@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 --version
-Python 3.12.1
-@kubo-kazuya0522 ➜ ~/デスクトップ $ c "import gi; gi.require_version('Gst', '1.0'); from gi.repository import Gst; print(Gst.version())"
-ythbash: c: コマンドが見つかりません
-on3 --version
-@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 --version
-Python 3.12.1
-@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import gi; print('gi OK')"
-gi OK
-@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 -c "import gi; gi.require_version('Gst', '1.0'); from gi.repository import Gst; print(Gst.version())"
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-ModuleNotFoundError: No module named 'gi'
+@kubo-kazuya0522 ➜ ~/デスクトップ $ /workspaces/xfce4-novn-/webrtc_audio.py
+bash: /workspaces/xfce4-novn-/webrtc_audio.py: 許可がありません
+@kubo-kazuya0522 ➜ ~/デスクトップ $ ls -la
+合計 20
+drwxr-xr-x 2 codespace codespace 4096 12月 26 02:05  .
+drwxr-x--- 1 codespace codespace 4096 12月 27 04:06  ..
+-rwxr-xr-x 1 codespace codespace  175 12月 26 01:44  Firefox.desktop
+-rwxr-xr-x 1 codespace codespace  184 12月 26 01:58 'Visual Studio Code.desktop'
+@kubo-kazuya0522 ➜ ~/デスクトップ $ ls -la *.py
+ls: '*.py' にアクセスできません: そのようなファイルやディレクトリはありません
 @kubo-kazuya0522 ➜ ~/デスクトップ $ 
-
