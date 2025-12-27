@@ -1,30 +1,23 @@
-@kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
-sudo sudo apt install -y \
-  gir1.2-gstreamer-1.0 \
-0% [処理中]e-1.0 \ns-bas
-  gstreamer1.0-tools \
-  gstreamer1.0-plugins-base \
-ヒット:1 https://dl.yarnpkg.com/debian stable InRelease
-ヒット:2 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
-0% [ヘッダの待機中です] [ヘッダの待機中です] [archive.ubuntu.s-good \
-  gstreamer1.0-plugins-bad
-ヒット:3 https://packages.mozilla.org/apt mozilla InRelease                    
-ヒット:4 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
-ヒット:5 https://packages.microsoft.com/repos/code stable InRelease            
-ヒット:6 http://archive.ubuntu.com/ubuntu noble InRelease                      
-ヒット:7 http://security.ubuntu.com/ubuntu noble-security InRelease            
-ヒット:8 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-ヒット:9 http://archive.ubuntu.com/ubuntu noble-backports InRelease
-パッケージリストを読み込んでいます... 完了
-依存関係ツリーを作成しています... 完了
-状態情報を読み取っています... 完了        
-アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
 @kubo-kazuya0522 ➜ ~/デスクトップ $ ls /usr/lib/x86_64-linux-gnu/girepository-1.0 | grep Gst
+Gst-1.0.typelib
+GstAllocators-1.0.typelib
+GstApp-1.0.typelib
+GstAudio-1.0.typelib
+GstBase-1.0.typelib
+GstCheck-1.0.typelib
+GstController-1.0.typelib
+GstGL-1.0.typelib
+GstGLEGL-1.0.typelib
+GstGLWayland-1.0.typelib
+GstGLX11-1.0.typelib
+GstNet-1.0.typelib
+GstPbutils-1.0.typelib
+GstRtp-1.0.typelib
+GstRtsp-1.0.typelib
+GstSdp-1.0.typelib
+GstTag-1.0.typelib
+GstVideo-1.0.typelib
 @kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import gi; gi.require_version('Gst','1.0'); from gi.repository import Gst; print(Gst.version())"
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-  File "/usr/lib/python3/dist-packages/gi/__init__.py", line 122, in require_version
-    raise ValueError('Namespace %s not available' % namespace)
-ValueError: Namespace Gst not available
+(major=1, minor=24, micro=2, nano=0)
 @kubo-kazuya0522 ➜ ~/デスクトップ $ 
 
