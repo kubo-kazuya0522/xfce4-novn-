@@ -1,27 +1,31 @@
+@kubo-kazuya0522 ➜ ~/デスクトップ $ ls /usr/lib/x86_64-linux-gnu/girepository-1.0 | grep Gst
+@kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
+sudo apt install -y sudo apt install -y \
+  gstreamer1.0-tools \
+  gstreamer1.0-plugins-base \
+  gstreamer1.0-plugins-good \
+0% [処理中]streamer1.0-plugins-bad \
+  gir1.2-gstreamer-1.0 \
+ヒット:1 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
+ヒット:2 https://packages.microsoft.com/repos/code stable InReleasen
+0% [packages.mozilla.org へ接続しています]s-base-1.0
+ヒット:3 https://dl.yarnpkg.com/debian stable InRelease
+ヒット:4 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
+ヒット:5 https://packages.mozilla.org/apt mozilla InRelease                    
+ヒット:6 http://security.ubuntu.com/ubuntu noble-security InRelease            
+ヒット:7 http://archive.ubuntu.com/ubuntu noble InRelease                      
+ヒット:8 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+ヒット:9 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+パッケージリストを読み込んでいます... 完了
+依存関係ツリーを作成しています... 完了
+状態情報を読み取っています... 完了        
+アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
+@kubo-kazuya0522 ➜ ~/デスクトップ $ ls /usr/lib/x86_64-linux-gnu/girepository-1.0 | grep Gst
 @kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import gi; gi.require_version('Gst','1.0'); from gi.repository import Gst; print(Gst.version())"
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
   File "/usr/lib/python3/dist-packages/gi/__init__.py", line 122, in require_version
     raise ValueError('Namespace %s not available' % namespace)
 ValueError: Namespace Gst not available
-@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3
-Python 3.12.3 (main, Nov  6 2025, 13:44:16) [GCC 13.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import gi
->>> gi.require_version('Gst', '1.0')
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/usr/lib/python3/dist-packages/gi/__init__.py", line 122, in require_version
-    raise ValueError('Namespace %s not available' % namespace)
-ValueError: Namespace Gst not available
->>> from gi.repository import Gst
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/usr/lib/python3/dist-packages/gi/importer.py", line 133, in create_module
-    raise ImportError('cannot import name %s, '
-ImportError: cannot import name Gst, introspection typelib not found
->>> print(Gst.version())
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-NameError: name 'Gst' is not defined
->>> 
+@kubo-kazuya0522 ➜ ~/デスクトップ $ 
+
