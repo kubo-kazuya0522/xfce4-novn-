@@ -1,11 +1,15 @@
-@kubo-kazuya0522 ➜ ~/デスクトップ $ /workspaces/xfce4-novn-/webrtc_audio.py
-bash: /workspaces/xfce4-novn-/webrtc_audio.py: 許可がありません
-@kubo-kazuya0522 ➜ ~/デスクトップ $ ls -la
-合計 20
-drwxr-xr-x 2 codespace codespace 4096 12月 26 02:05  .
-drwxr-x--- 1 codespace codespace 4096 12月 27 04:06  ..
--rwxr-xr-x 1 codespace codespace  175 12月 26 01:44  Firefox.desktop
--rwxr-xr-x 1 codespace codespace  184 12月 26 01:58 'Visual Studio Code.desktop'
-@kubo-kazuya0522 ➜ ~/デスクトップ $ ls -la *.py
-ls: '*.py' にアクセスできません: そのようなファイルやディレクトリはありません
+@kubo-kazuya0522 ➜ ~/デスクトップ $ find /workspaces -name "webrtc_audio.py" 2>/dev/null
+/workspaces/xfce4-novn-/webrtc_audio.py
+@kubo-kazuya0522 ➜ ~/デスクトップ $ find /workspaces -name "*webrtc*"
+/workspaces/xfce4-novn-/webrtc_audio.py
+@kubo-kazuya0522 ➜ ~/デスクトップ $ chmod +x webrtc_audio.py
+chmod: 'webrtc_audio.py' にアクセスできません: そのようなファイルやディレクトリはありません
+@kubo-kazuya0522 ➜ ~/デスクトップ $ chmod +x /workspaces/xfce4-novn-/webrtc_audio.py
+@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 webrtc_audio.py
+/usr/bin/python3: can't open file '/home/codespace/デスクトップ/webrtc_audio.py': [Errno 2] No such file or directory
+@kubo-kazuya0522 ➜ ~/デスクトップ $ head -n 5 webrtc_audio.py
+head: 'webrtc_audio.py' を 読み込み用に開くことが出来ません: そのようなファイルやディレクトリはありません
+@kubo-kazuya0522 ➜ ~/デスクトップ $ find /workspaces -name "webrtc_audio.py" 2>/dev/null
+/workspaces/xfce4-novn-/webrtc_audio.py
 @kubo-kazuya0522 ➜ ~/デスクトップ $ 
+
