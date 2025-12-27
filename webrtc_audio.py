@@ -18,7 +18,7 @@ audioconvert !
 audioresample !
 opusenc !
 rtpopuspay !
-application/x-rtp,media=audio,encoding-name=OPUS,payload=96 !
+application/x-rtp,media=audio,encoding-name=OPUS,clock-rate=48000,payload=96 !
 webrtcbin name=webrtc
 """
 
