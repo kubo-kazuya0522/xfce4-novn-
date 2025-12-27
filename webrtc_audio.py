@@ -3,30 +3,32 @@ import asyncio
 import json
 import gi
 import logging
+
 gi.require_version("Gst", "1.0")
-from gi.repository import Gst, GLib
+from gi.repository import Gst
 
 import websockets
 
 logging.basicConfig(level=logging.INFO)
-
 Gst.init(None)
 
 PIPELINE = """
+webrtcbin name=webrtc bundle-policy=max-bundle
+
 audiotestsrc is-live=true !
 audioconvert !
 audioresample !
 opusenc !
-rtpopuspay !
+rtpopuspay pt=96 !
 application/x-rtp,media=audio,encoding-name=OPUS,clock-rate=48000,payload=96 !
-webrtcbin name=webrtc
+queue !
+webrtc.
 """
 
-# GStreamer パイプライン作成
+
 pipeline = Gst.parse_launch(PIPELINE)
 webrtc = pipeline.get_by_name("webrtc")
 
-# WebSocket 接続を管理
 clients = set()
 loop = asyncio.get_event_loop()
 
@@ -41,9 +43,9 @@ def on_offer_created(promise, element, _):
     offer = reply.get_value("offer")
     element.emit("set-local-description", offer, None)
 
-    sdp = {"type": "offer", "sdp": offer.sdp.as_text()}
+    msg = {"type": "offer", "sdp": offer.sdp.as_text()}
     for ws in clients:
-        asyncio.run_coroutine_threadsafe(ws.send(json.dumps(sdp)), loop)
+        asyncio.run_coroutine_threadsafe(ws.send(json.dumps(msg)), loop)
 
 def on_ice_candidate(element, mline, candidate):
     msg = {"ice": {"candidate": candidate, "sdpMLineIndex": mline}}
@@ -57,20 +59,26 @@ async def ws_handler(ws):
     clients.add(ws)
     async for msg in ws:
         data = json.loads(msg)
+
         if "sdp" in data:
             sdp = Gst.SDPMessage.new()
             Gst.SDPMessage.parse_buffer(data["sdp"].encode(), sdp)
-            answer = Gst.WebRTCSessionDescription.new(Gst.WebRTCSDPType.ANSWER, sdp)
+            answer = Gst.WebRTCSessionDescription.new(
+                Gst.WebRTCSDPType.ANSWER, sdp
+            )
             webrtc.emit("set-remote-description", answer, None)
+
         elif "ice" in data:
             ice = data["ice"]
-            webrtc.emit("add-ice-candidate", ice["sdpMLineIndex"], ice["candidate"])
+            webrtc.emit("add-ice-candidate",
+                        ice["sdpMLineIndex"],
+                        ice["candidate"])
     clients.remove(ws)
 
 async def main():
     pipeline.set_state(Gst.State.PLAYING)
     async with websockets.serve(ws_handler, "0.0.0.0", 9001):
-        await asyncio.Future()  # 永久待機
+        await asyncio.Future()
 
 if __name__ == "__main__":
     loop.run_until_complete(main())
