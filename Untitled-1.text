@@ -1,24 +1,30 @@
-@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 --version 
+@kubo-kazuya0522 ➜ ~/デスクトップ $ python3 --version
 Python 3.11.9
 @kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
-do apt install -sudo apt install -y \
-  libgirepository1.0-dev \
-  libcairo2-dev \
-  pkg-config \
-  gir1.2-gst-1.0 \
-0% [処理中]0 \lugins-base-1.
-  gstreamer1.0-plugins-good \
-  gstreamer1.0-plugins-bad \
+sudo apt install -y libcairo2-dev libgirepository1.0-dev pkg-config python3-dev
+sudo apt install -y libcairo2-dev libgirepository1.0-dev pkg-config python3-dev
 ヒット:1 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
-\
 ヒット:2 https://packages.microsoft.com/repos/code stable InRelease            
-0% [packages.mozilla.org へ接続しています] [archive.ubuntu.com へ接�  gstreamer1.0-pulseaudio \
-  gstreamer1.0-tools
-ヒット:3 https://dl.yarnpkg.com/debian stable InRelease                        
-ヒット:4 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
+ヒット:3 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
+ヒット:4 https://dl.yarnpkg.com/debian stable InRelease                        
 ヒット:5 https://packages.mozilla.org/apt mozilla InRelease                    
 ヒット:6 http://archive.ubuntu.com/ubuntu noble InRelease                      
-ヒット:7 http://security.ubuntu.com/ubuntu noble-security InRelease            
+ヒット:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease              
+ヒット:8 http://security.ubuntu.com/ubuntu noble-security InRelease
+ヒット:9 http://archive.ubuntu.com/ubuntu noble-backports InRelease
+パッケージリストを読み込んでいます... 完了
+依存関係ツリーを作成しています... 完了
+状態情報を読み取っています... 完了        
+アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
+@kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
+sudo apt instalsudo apt install -y libcairo2-dev libgirepository1.0-dev pkg-conf0% [処理中]ython3-dev
+ヒット:1 https://dl.yarnpkg.com/debian stable InRelease
+ヒット:2 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
+ヒット:3 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
+ヒット:4 https://packages.microsoft.com/repos/code stable InRelease            
+ヒット:5 http://security.ubuntu.com/ubuntu noble-security InRelease            
+ヒット:6 https://packages.mozilla.org/apt mozilla InRelease                    
+ヒット:7 http://archive.ubuntu.com/ubuntu noble InRelease     
 ヒット:8 http://archive.ubuntu.com/ubuntu noble-updates InRelease
 ヒット:9 http://archive.ubuntu.com/ubuntu noble-backports InRelease
 パッケージリストを読み込んでいます... 完了
@@ -26,29 +32,10 @@ do apt install -sudo apt install -y \
 状態情報を読み取っています... 完了        
 アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
 @kubo-kazuya0522 ➜ ~/デスクトップ $ python3 -m pip install --upgrade pip setuptools wheel
-python3 -m pip install PyGObject
-Requirement already satisfied: pip in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (24.0)
-Collecting pip
-  Using cached pip-25.3-py3-none-any.whl.metadata (4.7 kB)
-Requirement already satisfied: setuptools in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (65.5.0)
-Collecting setuptools
-  Using cached setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
-Collecting wheel
-  Downloading wheel-0.45.1-py3-none-any.whl.metadata (2.3 kB)
-Using cached pip-25.3-py3-none-any.whl (1.8 MB)
-Using cached setuptools-80.9.0-py3-none-any.whl (1.2 MB)
-Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.5/72.5 kB 4.6 MB/s eta 0:00:00
-Installing collected packages: wheel, setuptools, pip
-  Attempting uninstall: setuptools
-    Found existing installation: setuptools 65.5.0
-    Uninstalling setuptools-65.5.0:
-      Successfully uninstalled setuptools-65.5.0
-  Attempting uninstall: pip
-    Found existing installation: pip 24.0
-    Uninstalling pip-24.0:
-      Successfully uninstalled pip-24.0
-Successfully installed pip-25.3 setuptools-80.9.0 wheel-0.45.1
+ython3 -m pip install PyGObject
+Requirement already satisfied: pip in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (25.3)
+Requirement already satisfied: setuptools in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (80.9.0)
+Requirement already satisfied: wheel in /home/codespace/.pyenv/versions/3.11.9/lib/python3.11/site-packages (0.45.1)
 @kubo-kazuya0522 ➜ ~/デスクトップ $ python3 -m pip install PyGObject
 Collecting PyGObject
   Using cached pygobject-3.54.5.tar.gz (1.3 MB)
@@ -75,11 +62,11 @@ Collecting PyGObject
         × Preparing metadata (pyproject.toml) did not run successfully.
         │ exit code: 1
         ╰─> [47 lines of output]
-            + meson setup /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md -Dwheel=true -Dtests=false --native-file=/tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw/meson-python-native-file.ini
+            + meson setup /tmp/pip-install-g_pfs68b/pycairo_1b605b675f164dd8b59e2ba490fb203e /tmp/pip-install-g_pfs68b/pycairo_1b605b675f164dd8b59e2ba490fb203e/.mesonpy-_sl_38sh -Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md -Dwheel=true -Dtests=false --native-file=/tmp/pip-install-g_pfs68b/pycairo_1b605b675f164dd8b59e2ba490fb203e/.mesonpy-_sl_38sh/meson-python-native-file.ini
             The Meson build system
             Version: 1.10.0
-            Source dir: /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb
-            Build dir: /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw
+            Source dir: /tmp/pip-install-g_pfs68b/pycairo_1b605b675f164dd8b59e2ba490fb203e
+            Build dir: /tmp/pip-install-g_pfs68b/pycairo_1b605b675f164dd8b59e2ba490fb203e/.mesonpy-_sl_38sh
             Build type: native build
             Project name: pycairo
             Project version: 1.29.0
@@ -121,7 +108,7 @@ Collecting PyGObject
       
             ../cairo/meson.build:31:12: ERROR: Dependency "cairo" not found, tried pkgconfig and cmake
       
-            A full log can be found at /tmp/pip-install-hhwu_2ks/pycairo_76843c6263944c5db46832ca90f18dcb/.mesonpy-8_clmzuw/meson-logs/meson-log.txt
+            A full log can be found at /tmp/pip-install-g_pfs68b/pycairo_1b605b675f164dd8b59e2ba490fb203e/.mesonpy-_sl_38sh/meson-logs/meson-log.txt
             [end of output]
       
         note: This error originates from a subprocess, and is likely not a problem with pip.
