@@ -1,46 +1,71 @@
 #!/usr/bin/env python3
-import asyncio, json, gi, logging
+import asyncio
+import json
+import logging
+import gi
 
 gi.require_version("Gst", "1.0")
 gi.require_version("GstWebRTC", "1.0")
-from gi.repository import Gst, GstWebRTC
+from gi.repository import Gst, GstWebRTC, GLib
+
 import websockets
 
 logging.basicConfig(level=logging.INFO)
 Gst.init(None)
 
-PIPELINE = """
-audiotestsrc is-live=true !
-audioconvert !
-audioresample !
-opusenc !
-rtpopuspay pt=96 !
-queue name=rtp_queue
-"""
+# ----- GStreamer pipeline -----
+pipeline = Gst.Pipeline.new("audio-pipeline")
 
-pipeline = Gst.parse_launch(PIPELINE)
+# audiotestsrc
+src = Gst.ElementFactory.make("audiotestsrc", "src")
+src.set_property("is-live", True)
 
+# convert/resample/encode
+conv = Gst.ElementFactory.make("audioconvert", "conv")
+resample = Gst.ElementFactory.make("audioresample", "resample")
+enc = Gst.ElementFactory.make("opusenc", "enc")
+pay = Gst.ElementFactory.make("rtpopuspay", "pay")
+pay.set_property("pt", 96)
+
+# webrtcbin
 webrtc = Gst.ElementFactory.make("webrtcbin", "webrtc")
 webrtc.set_property("bundle-policy", "max-bundle")
-pipeline.add(webrtc)
 
-queue = pipeline.get_by_name("rtp_queue")
-srcpad = queue.get_static_pad("src")
+for e in [src, conv, resample, enc, pay, webrtc]:
+    pipeline.add(e)
 
-# 🔥 pad が出てきた瞬間に link する
-def on_pad_added(element, pad):
-    logging.info("webrtcbin pad added: %s", pad.get_name())
-    if pad.get_direction() != Gst.PadDirection.SINK:
+src.link(conv)
+conv.link(resample)
+resample.link(enc)
+enc.link(pay)
+pay.link(webrtc)
+
+clients = set()
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
+# ----- Offer 作成 -----
+def on_offer_created(promise, element, _):
+    promise.wait()
+    offer = promise.get_reply().get_value("offer")
+    if not offer:
+        logging.error("Offer is None")
         return
-    if srcpad.is_linked():
-        return
-    ret = srcpad.link(pad)
-    assert ret == Gst.PadLinkReturn.OK, "pad link failed"
-    logging.info("RTP linked to webrtcbin")
+    element.emit("set-local-description", offer, None)
+    msg = {"type": "offer", "sdp": offer.sdp.as_text()}
+    for ws in clients:
+        asyncio.run_coroutine_threadsafe(ws.send(json.dumps(msg)), loop)
+    logging.info("Offer sent to clients")
 
-webrtc.connect("pad-added", on_pad_added)
+# ----- ICE candidate -----
+def on_ice_candidate(element, mline, candidate):
+    msg = {"ice": {"candidate": candidate, "sdpMLineIndex": mline}}
+    for ws in clients:
+        asyncio.run_coroutine_threadsafe(ws.send(json.dumps(msg)), loop)
 
-# transceiver は negotiation 用に必要
+webrtc.connect("on-ice-candidate", on_ice_candidate)
+
+# ----- Add transceiver and create offer immediately -----
 webrtc.emit(
     "add-transceiver",
     GstWebRTC.WebRTCRTPTransceiverDirection.SENDONLY,
@@ -49,55 +74,47 @@ webrtc.emit(
     )
 )
 
-# ---------- WebRTC signaling ----------
-clients = set()
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
+promise = Gst.Promise.new_with_change_func(on_offer_created, webrtc, None)
+webrtc.emit("create-offer", None, promise)
 
-def on_negotiation_needed(element):
-    logging.info("Negotiation needed")
-    promise = Gst.Promise.new_with_change_func(on_offer_created, element, None)
-    element.emit("create-offer", None, promise)
-
-def on_offer_created(promise, element, _):
-    promise.wait()
-    offer = promise.get_reply().get_value("offer")
-    element.emit("set-local-description", offer, None)
-    msg = {"type": "offer", "sdp": offer.sdp.as_text()}
-    for ws in clients:
-        asyncio.run_coroutine_threadsafe(ws.send(json.dumps(msg)), loop)
-
-def on_ice_candidate(element, mline, candidate):
-    msg = {"ice": {"candidate": candidate, "sdpMLineIndex": mline}}
-    for ws in clients:
-        asyncio.run_coroutine_threadsafe(ws.send(json.dumps(msg)), loop)
-
-webrtc.connect("on-negotiation-needed", on_negotiation_needed)
-webrtc.connect("on-ice-candidate", on_ice_candidate)
-
+# ----- WebSocket handler -----
 async def ws_handler(ws):
     clients.add(ws)
-    async for msg in ws:
-        data = json.loads(msg)
-        if data.get("type") == "answer":
-            sdp = Gst.SDPMessage.new()
-            Gst.SDPMessage.parse_buffer(data["sdp"].encode(), sdp)
-            answer = GstWebRTC.WebRTCSessionDescription.new(
-                GstWebRTC.WebRTCSDPType.ANSWER, sdp
-            )
-            webrtc.emit("set-remote-description", answer, None)
-        elif "ice" in data:
-            webrtc.emit(
-                "add-ice-candidate",
-                data["ice"]["sdpMLineIndex"],
-                data["ice"]["candidate"]
-            )
-    clients.remove(ws)
+    try:
+        async for msg in ws:
+            try:
+                data = json.loads(msg)
+                if data.get("type") == "answer":
+                    from gi.repository import GstSDP
+                    sdp = Gst.SDPMessage.new()
+                    Gst.SDPMessage.parse_buffer(data["sdp"].encode(), sdp)
+                    answer = GstWebRTC.WebRTCSessionDescription.new(
+                        GstWebRTC.WebRTCSDPType.ANSWER, sdp
+                    )
+                    webrtc.emit("set-remote-description", answer, None)
+                    logging.info("Remote description set from client answer")
+                elif "ice" in data:
+                    webrtc.emit(
+                        "add-ice-candidate",
+                        data["ice"]["sdpMLineIndex"],
+                        data["ice"]["candidate"]
+                    )
+                    logging.info("Added ICE candidate from client")
+            except Exception as e:
+                logging.error("Error handling message: %s", e)
+    except Exception as e:
+        logging.error("WebSocket handler failed: %s", e)
+    finally:
+        clients.discard(ws)
+        await ws.close()
+        logging.info("WebSocket connection closed")
 
+# ----- main loop -----
 async def main():
     pipeline.set_state(Gst.State.PLAYING)
     logging.info("Pipeline PLAYING")
     async with websockets.serve(ws_handler, "0.0.0.0", 9001):
-        await asyncio.Future()
+        logging.info("WebSocket server listening on 0.0.0.0:9001")
+        await asyncio.Future()  # 永久待機
 
 loop.run_until_complete(main())
