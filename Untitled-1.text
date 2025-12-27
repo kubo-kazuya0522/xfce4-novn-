@@ -1,24 +1,24 @@
 @kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
-ssudo apt install -y python3-websockets
+sudo sudo apt install -y python3-websockets
 ヒット:1 https://dl.yarnpkg.com/debian stable InRelease
-ヒット:2 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease                               
-ヒット:3 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease                 
-ヒット:4 https://packages.microsoft.com/repos/code stable InRelease                                       
-ヒット:5 https://packages.mozilla.org/apt mozilla InRelease                                  
-ヒット:6 http://archive.ubuntu.com/ubuntu noble InRelease                                    
-ヒット:7 http://archive.ubuntu.com/ubuntu noble-updates InRelease              
-ヒット:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease                           
-ヒット:9 http://security.ubuntu.com/ubuntu noble-security InRelease                           
+ヒット:2 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease   
+ヒット:3 https://packages.microsoft.com/repos/code stable InRelease                         
+ヒット:4 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease                 
+ヒット:5 https://packages.mozilla.org/apt mozilla InRelease                                                                           
+ヒット:6 http://security.ubuntu.com/ubuntu noble-security InRelease                                                                   
+ヒット:7 http://archive.ubuntu.com/ubuntu noble InRelease                                                     
+ヒット:8 http://archive.ubuntu.com/ubuntu noble-updates InRelease
+ヒット:9 http://archive.ubuntu.com/ubuntu noble-backports InRelease
 パッケージリストを読み込んでいます... 完了
 依存関係ツリーを作成しています... 完了
 状態情報を読み取っています... 完了        
 アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
-@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import websockets; print(websockets.__version__)"
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-ModuleNotFoundError: No module named 'websockets'
-@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import websockets; print(websockets.__version__)"
+@kubo-kazuya0522 ➜ ~/デスクトップ $ dpkg -L python3-websockets | head
+dpkg-query: パッケージ 'python3-websockets' はまだインストールされていません
+Use dpkg --contents (= dpkg-deb --contents) to list archive files contents.
+@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import websockets; print(websockets)"
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
 ModuleNotFoundError: No module named 'websockets'
 @kubo-kazuya0522 ➜ ~/デスクトップ $ 
+
