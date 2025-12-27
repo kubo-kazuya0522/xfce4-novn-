@@ -13,10 +13,13 @@ logging.basicConfig(level=logging.INFO)
 Gst.init(None)
 
 PIPELINE = """
-pulsesrc device=webrtc.monitor !
-audioconvert ! audioresample !
-opusenc bitrate=16000 !
-webrtcbin name=webrtc stun-server=stun://stun.l.google.com:19302
+audiotestsrc is-live=true !
+audioconvert !
+audioresample !
+opusenc !
+rtpopuspay !
+application/x-rtp,media=audio,encoding-name=OPUS,payload=96 !
+webrtcbin name=webrtc
 """
 
 # GStreamer パイプライン作成
