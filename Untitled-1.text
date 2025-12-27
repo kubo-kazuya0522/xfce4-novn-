@@ -1,15 +1,27 @@
-@kubo-kazuya0522 ➜ ~/デスクトップ $ find /workspaces -name "webrtc_audio.py" 2>/dev/null
-/workspaces/xfce4-novn-/webrtc_audio.py
-@kubo-kazuya0522 ➜ ~/デスクトップ $ find /workspaces -name "*webrtc*"
-/workspaces/xfce4-novn-/webrtc_audio.py
-@kubo-kazuya0522 ➜ ~/デスクトップ $ chmod +x webrtc_audio.py
-chmod: 'webrtc_audio.py' にアクセスできません: そのようなファイルやディレクトリはありません
-@kubo-kazuya0522 ➜ ~/デスクトップ $ chmod +x /workspaces/xfce4-novn-/webrtc_audio.py
-@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 webrtc_audio.py
-/usr/bin/python3: can't open file '/home/codespace/デスクトップ/webrtc_audio.py': [Errno 2] No such file or directory
-@kubo-kazuya0522 ➜ ~/デスクトップ $ head -n 5 webrtc_audio.py
-head: 'webrtc_audio.py' を 読み込み用に開くことが出来ません: そのようなファイルやディレクトリはありません
-@kubo-kazuya0522 ➜ ~/デスクトップ $ find /workspaces -name "webrtc_audio.py" 2>/dev/null
-/workspaces/xfce4-novn-/webrtc_audio.py
-@kubo-kazuya0522 ➜ ~/デスクトップ $ 
-
+@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3 -c "import gi; gi.require_version('Gst','1.0'); from gi.repository import Gst; print(Gst.version())"
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/usr/lib/python3/dist-packages/gi/__init__.py", line 122, in require_version
+    raise ValueError('Namespace %s not available' % namespace)
+ValueError: Namespace Gst not available
+@kubo-kazuya0522 ➜ ~/デスクトップ $ /usr/bin/python3
+Python 3.12.3 (main, Nov  6 2025, 13:44:16) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import gi
+>>> gi.require_version('Gst', '1.0')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib/python3/dist-packages/gi/__init__.py", line 122, in require_version
+    raise ValueError('Namespace %s not available' % namespace)
+ValueError: Namespace Gst not available
+>>> from gi.repository import Gst
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/lib/python3/dist-packages/gi/importer.py", line 133, in create_module
+    raise ImportError('cannot import name %s, '
+ImportError: cannot import name Gst, introspection typelib not found
+>>> print(Gst.version())
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'Gst' is not defined
+>>> 
