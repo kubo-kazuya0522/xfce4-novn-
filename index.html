@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <body>
+    <h3>WebRTC Audio Test</h3>
+    <audio id="audio" autoplay></audio>
+
+    <script>
+      const pc = new RTCPeerConnection();
+
+      // 音声を受信
+      pc.ontrack = e => {
+        document.getElementById("audio").srcObject = e.streams[0];
+      };
+
+      const ws = new WebSocket("ws://localhost:9001");
+
+      ws.onmessage = async e => {
+        const msg = JSON.parse(e.data);
+
+        if (msg.type === "offer") {
+          await pc.setRemoteDescription(msg);
+          const ans = await pc.createAnswer();
+          await pc.setLocalDescription(ans);
+          ws.send(JSON.stringify(ans));
+        }
+
+        if (msg.ice) {
+          await pc.addIceCandidate(msg.ice);
+        }
+      };
+    </script>
+  </body>
+</html>
