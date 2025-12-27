@@ -1,0 +1,33 @@
+@kubo-kazuya0522 ➜ ~/デスクトップ $ sudo apt update
+sudo apt install -y \
+    python3-gi \
+    python3-gi-cairo \
+    gir1.2-gst-1.0 \
+0% [処理中]t-plugins-base-1.0 \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad \
+ヒット:1 https://dl.yarnpkg.com/debian stable InRelease
+0% [ヘッダの待機中です] [ヘッダの待機中です] [ヘッダの待er1.0-plugins-base \
+    gstreamer1.0-pulseaudio \
+ヒット:2 https://repo.anaconda.com/pkgs/misc/debrepo/conda stable InRelease    
+0% [ヘッダの待機中です] [ヘッダの待機中です] [archive.ubuntu.gstreamer1.0-tools
+ヒット:3 https://packages.mozilla.org/apt mozilla InRelease                    
+ヒット:4 http://archive.ubuntu.com/ubuntu noble InRelease                      
+ヒット:5 http://archive.ubuntu.com/ubuntu noble-updates InRelease              
+ヒット:6 https://packages.microsoft.com/repos/microsoft-ubuntu-noble-prod noble InRelease
+ヒット:7 https://packages.microsoft.com/repos/code stable InRelease            
+ヒット:8 http://archive.ubuntu.com/ubuntu noble-backports InRelease            
+ヒット:9 http://security.ubuntu.com/ubuntu noble-security InRelease
+パッケージリストを読み込んでいます... 完了
+依存関係ツリーを作成しています... 完了
+状態情報を読み取っています... 完了        
+アップグレードできるパッケージが 1 個あります。表示するには 'apt list --upgradable' を実行してください。
+@kubo-kazuya0522 ➜ ~/デスクトップ $ python3
+Python 3.12.1 (main, Nov 27 2025, 10:47:52) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import gi
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'gi'
+>>> 
+
